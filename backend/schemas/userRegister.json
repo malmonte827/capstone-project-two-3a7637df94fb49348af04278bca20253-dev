@@ -1,0 +1,49 @@
+{
+"$schema": "https://json-schema.org/draft/2019-09/schema",
+"$id": "http://example.com/example.json",
+"type": "object",
+"title": "userRegister Schema",
+"required": [
+    "username",
+    "password",
+    "first_name",
+    "last_name",
+    "email",
+    "phone_number"
+],
+"properties": {
+    "username": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 30
+    },
+    "password": {
+        "type": "string",
+        "minLength": 8,
+        "maxLength": 24
+    },
+    "first_name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 30
+    },
+    "last_name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 30
+    },
+    "email": {
+        "type": "string",
+        "minLength": 6,
+        "maxLength": 100,
+        "format": "email"
+    },
+    "phone_number": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 20,
+        "pattern": "^(\\\\([0-9]{3}\\\\))?[0-9]{3}-[0-9]{4}$"
+    }
+},
+"additionalProperties": false
+}
