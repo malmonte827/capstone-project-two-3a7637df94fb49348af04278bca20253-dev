@@ -6,11 +6,12 @@ const express = require("express");
 const cors = require("cors");
 
 const { NotFoundError } = require("./expressError");
-
+const {authenticateJWT} = require("./middleware/auth")
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(authenticateJWT)
 
 
 /** Handle 404 errors -- mathces everything */
