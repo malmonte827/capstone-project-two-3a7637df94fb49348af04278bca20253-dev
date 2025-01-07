@@ -11,7 +11,7 @@ const { UnauthorizedError } = require("../expressError");
  * If token was given, verify token
  * If token valid, store payload in res.locals
  *
- *
+ * error in this middleware isn't error -- continue on
  */
 
 function authenticateJWT(req, res, next) {
