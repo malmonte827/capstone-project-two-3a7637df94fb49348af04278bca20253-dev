@@ -141,7 +141,27 @@ class User {
         return user;
     }
 
-    static async remove() {}
+
+    /** Removes user from database
+     * 
+     * Returns undefined
+     * 
+     * Throws NotFoundError if user not found
+     */
+    static async remove(username) {
+        const result = await db.query(
+            `DELETE
+            FROM users
+            WHERE username = $1
+            RETURNING username`,
+            [username])
+
+            const user = result.rows[0]
+
+            if(!user){
+                throw new NotFoundError(`No user: ${username}`)
+            }
+    }
 
     static async get() {}
 
