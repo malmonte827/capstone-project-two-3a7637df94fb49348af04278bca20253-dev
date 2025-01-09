@@ -2,7 +2,11 @@
 
 const db = require("../db");
 const bcrypt = require("bcrypt");
-const {UnauthorizedError} = require("../expressError");
+const {BCRYPT_WORK_FACTOR} = require("../config")
+
+const {UnauthorizedError,
+    BadRequestError
+} = require("../expressError");
 
 
 class User {
@@ -39,6 +43,61 @@ class User {
             throw new UnauthorizedError("Invalid username/password");
         }
     }
+
+
+/**Register new user
+ * 
+ * Returns {username, firstName, lastName, email, phoneNumber, isAdmin }
+ * 
+ * Throws BadRequestError if theres a duplicate
+ */
+static async register({
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    isAdmin,
+}) {
+    const checkDuplicate = await db.query(
+        `SELECT username
+            FROM users
+            WHERE username = $1`,
+        [username]
+    );
+    if (checkDuplicate.rows[0]) {
+        throw new BadRequestError(`Username taken. Try again`);
+    }
+
+    const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+
+    const result = await db.query(
+        `INSERT INTO users
+        (username,
+        password,
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        is_admin)
+        VALUES($1, $2, $3, $4, $5, $6, $7)
+        RETURNING username, first_name AS firstName, last_name AS lastName, email, phone_number AS phoneNumber, is_admin AS isAdmin`,
+        [
+            username,
+            hashedPassword,
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            isAdmin,
+        ]
+    );
+
+    const user = result.rows[0];
+
+    return user;
+}
 
 }
  module.exports = User
