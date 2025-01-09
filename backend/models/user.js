@@ -100,11 +100,10 @@ class User {
         return user;
     }
 
-
     /** Update user data with 'data'
-     * 
+     *
      * Returns {username, firstName, lastName, email, phoneNumber, isAdmin}
-     * 
+     *
      * Throws NotFoundError if user not found
      */
     static async update(username, data) {
@@ -141,11 +140,10 @@ class User {
         return user;
     }
 
-
     /** Removes user from database
-     * 
+     *
      * Returns undefined
-     * 
+     *
      * Throws NotFoundError if user not found
      */
     static async remove(username) {
@@ -154,16 +152,42 @@ class User {
             FROM users
             WHERE username = $1
             RETURNING username`,
-            [username])
+            [username]
+        );
 
-            const user = result.rows[0]
+        const user = result.rows[0];
 
-            if(!user){
-                throw new NotFoundError(`No user: ${username}`)
-            }
+        if (!user) {
+            throw new NotFoundError(`No user: ${username}`);
+        }
     }
 
-    static async get() {}
+    /** Gets data about user
+     *
+     * Returns {username firstNmae, lastName, email, phoneNumber, isAdmin}
+     *
+     * Throws NotFoundError if not found
+     */
+    static async get(username) {
+        const result = await db.query(
+            `SELECT username,
+                    first_name AS "firstName",
+                    last_name AS "lastName",
+                    email,
+                    phone_number AS "phoneNumber",
+                    is_admin AS "isAdmin"
+             FROM users
+             WHERE username = $1`,
+            [username]
+        );
+
+        const user = result.rows[0];
+
+        if (!user) {
+            throw new NotFoundError(`No user: ${username}`);
+        }
+        return user;
+    }
 
     static async getAll() {}
 }
