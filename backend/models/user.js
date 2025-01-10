@@ -189,6 +189,24 @@ class User {
         return user;
     }
 
-    static async getAll() {}
+
+    /** Get all users
+     * 
+     * Return [{username, first_name, last_name, email, phone_nu,mber, is_admin }, ...]
+     */
+    static async getAll() {
+        const result = await db.query(
+            `SELECT username,
+                    first_name AS firstName,
+                    last_name AS lastName,
+                    email,
+                    phone_number AS phoneNumber,
+                    is_admin AS isAdmin
+            FROM users
+            ORDER BY username`
+        )
+
+        return result.rows
+    }
 }
 module.exports = User;
