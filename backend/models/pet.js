@@ -77,4 +77,29 @@ class Pet {
         return pet
 
     }
+
+
+    /** Removes pet from database
+     * 
+     * Returns undefined
+     * 
+     * Throws NotFoundError if not found
+     */
+    static async remove(id){
+        const result = await db.query(
+            `DELETE
+            FROM pets
+            WHERE id = $1
+            RETURNING id`,
+            [id]
+        )
+
+        const pet = result.rows[0]
+
+        if(!pet){
+            throw new NotFoundError(`No pet: ${id}`)
+        }
+    }
 }
+
+module.exports = Pet
