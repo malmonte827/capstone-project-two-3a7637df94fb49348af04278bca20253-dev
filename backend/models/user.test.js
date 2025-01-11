@@ -17,7 +17,7 @@ const {
 } = require("./_testCommon");
 
 beforeAll(commonBeforeAll);
-beforEach(commonBeforeEach);
+beforeEach(commonBeforeEach);
 afterEach(commonAfterEach);
 afterAll(commonAfterAll);
 
@@ -31,7 +31,7 @@ describe("authenticate", function () {
             firstName: "u1fn",
             lastName: "u1ln",
             email: "u1@email.com",
-            phoneNumber: 1234567890,
+            phoneNumber: '1234567890',
             isAdmin: false,
         });
     });
