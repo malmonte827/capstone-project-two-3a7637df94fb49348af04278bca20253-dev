@@ -14,6 +14,6 @@ CREATE TABLE pets (
     name TEXT NOT NULL,
     age SMALLINT,
     species TEXT NOT NULL,
-    hunger INTEGER NOT NULL DEFAULT 100
+    hunger INTEGER NOT NULL DEFAULT 100,
     user_id INTEGER NOT NULL REFERENCES users       
 );
