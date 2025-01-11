@@ -12,7 +12,7 @@ CREATE DATABASE capstone;
 \prompt 'Return for yes or control-C to cancel' foo
 
 DROP DATABASE capstone_test;
-CREATE DATABSE capstone_test;
+CREATE DATABASE capstone_test;
 \connect capstone_test
 
 \i capstone-schema.sql
