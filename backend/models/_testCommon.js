@@ -1,23 +1,24 @@
 const db = require("../db");
+const bcrypt = require("bcrypt")
 const { BCRYPT_WORK_FACTOR } = require("../config");
 const testUserIds = [];
 
 async function commonBeforeAll() {
-    await db.query(`DELETE FROM users`);
-
     await db.query(`DELETE FROM pets`);
+    
+    await db.query(`DELETE FROM users`);
 
     const userResults = await db.query(
         `
         INSERT INTO users (username,
                            password,
-                           first_name
-                           last_name
+                           first_name,
+                           last_name,
                            email,
                            phone_number)
-        VALUES (u1, $1, u1fn, u1ln, u1@email.com, 1234567890),
-        VALUES (u2, $2, u2fn, u2ln, u2@email.com, 0987654321),
-        VALUES (u3, $3, u3fn, u3ln, u3@email.com, 1029384756)
+        VALUES ('u1', $1, 'u1fn', 'u1ln', 'u1@email.com', 1234567890),
+               ('u2', $2, 'u2fn', 'u2ln', 'u2@email.com', 0987654321),
+               ('u3', $3, 'u3fn', 'u3ln', 'u3@email.com', 1029384756)
         RETURNING id`,
         [
             await bcrypt.hash("password1", BCRYPT_WORK_FACTOR),
@@ -30,11 +31,11 @@ async function commonBeforeAll() {
 
     await db.query(
         `
-        INSERT INTO pets (name, age, species, hunger, user_id
-        VALUES (p1, 1, cat, 1, $1)
-        VALUES (p2, 2, dog, 2, $2)
-        VALUES (p3, 3, bird, 3, $3)`,
-        [testUserIds[0], testUserIds[3], testUserIds[2]]
+        INSERT INTO pets (name, age, species, hunger, user_id)
+        VALUES ('p1', 1, 'cat', 1, $1),
+               ('p2', 2, 'dog', 2, $2),
+               ('p3', 3, 'bird', 3, $3)`,
+        [testUserIds[0], testUserIds[1], testUserIds[2]]
     );
 }
 
