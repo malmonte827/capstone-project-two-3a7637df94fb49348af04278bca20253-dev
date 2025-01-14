@@ -151,3 +151,24 @@ describe("update", function () {
         }
     });
 });
+
+/****************************************************** remove */
+
+describe("remove", function () {
+    it("works", async function () {
+        await User.remove("u1");
+        const results = await db.query(
+            `SELECT * FROM users WHERE username = 'u1'`
+        );
+        expect(results.rows.length).toEqual(0);
+    });
+
+    test("not found: no known user", async function () {
+        expect.assertions(1);
+        try {
+            await User.remove("nonUser");
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    });
+});
