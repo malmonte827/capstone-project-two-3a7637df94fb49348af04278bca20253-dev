@@ -53,3 +53,46 @@ describe("authenticate", function () {
         }
     });
 });
+
+/****************************************************** register */
+
+describe("register", function () {
+    const newUser = {
+        username: "newUser",
+        firstName: "new",
+        lastName: "User",
+        email: "newUser@email.com",
+        phoneNumber: "1111111111",
+        isAdmin: false,
+    };
+
+    it("works", async function () {
+        const user = await User.register({ ...newUser, password: "password" });
+
+        expect(user).toEqual(newUser);
+        const result = await db.query(
+            `SELECT * FROM users WHERE username = 'newUser'`
+        );
+        expect(result.rows.length).toEqual(1);
+        expect(result.rows[0].password.startsWith("$2b$")).toBeTruthy();
+    });
+
+    it("works: add admin", async function () {
+        const user = await User.register({
+            ...newUser,
+            password: "password",
+            isAdmin: true,
+        });
+        expect(user.isAdmin).toEqual(true);
+    });
+
+    test("duplicate: bad request", async function () {
+        expect.assertions(1);
+        try {
+            await User.register({ ...newUser, password: "password" });
+            await User.register({ ...newUser, password: "password" });
+        } catch (err) {
+            expect(err instanceof BadRequestError).toBeTruthy();
+        }
+    });
+});
