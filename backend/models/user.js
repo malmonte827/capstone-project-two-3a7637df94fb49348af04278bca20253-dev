@@ -42,9 +42,9 @@ class User {
                 delete user.password;
                 return user;
             }
-        } else {
+        }  
             throw new UnauthorizedError("Invalid username/password");
-        }
+        
     }
 
     /**Register new user
@@ -128,6 +128,7 @@ class User {
                             RETURNING username,
                                     first_name AS "firstName",
                                     last_name AS "lastName",
+                                    email,
                                     phone_number AS "phoneNumber",
                                     is_admin AS "isAdmin"`;
         const result = await db.query(updateQuery, [...values, username]);
