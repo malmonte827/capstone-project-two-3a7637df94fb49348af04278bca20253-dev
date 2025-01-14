@@ -96,3 +96,58 @@ describe("register", function () {
         }
     });
 });
+
+/****************************************************** update */
+
+describe("update", function () {
+    const updateData = {
+        firstName: "newfirst",
+        lastName: "newLast",
+        email: "new@email.com",
+        phoneNumber: "999999999",
+        isAdmin: true,
+    };
+    it("works", async function () {
+        const update = await User.update("u1", updateData);
+        expect(update).toEqual({
+            ...updateData,
+            username: "u1",
+        });
+    });
+
+    it("works: new password", async function () {
+        const update = await User.update("u1", { password: "new" });
+        expect(update).toEqual({
+            username: "u1",
+            firstName: "u1fn",
+            lastName: "u1ln",
+            email: "u1@email.com",
+            phoneNumber: "1234567890",
+            isAdmin: false,
+        });
+
+        const result = await db.query(
+            `SELECT * FROM users WHERE username = 'u1'`
+        );
+        expect(result.rows.length).toEqual(1);
+        expect(result.rows[0].password.startsWith("$2b$")).toEqual(true);
+    });
+
+    test("not found: no known user", async function () {
+        expect.assertions(1);
+        try {
+            await User.update("nonUser", { firstName: "nonUser" });
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    });
+
+    test("bad request: no data", async function () {
+        expect.assertions(1);
+        try {
+            await User.update("u1", {});
+        } catch (err) {
+            expect(err instanceof BadRequestError).toBeTruthy();
+        }
+    });
+});
