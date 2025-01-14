@@ -84,7 +84,7 @@ class User {
         phone_number,
         is_admin)
         VALUES($1, $2, $3, $4, $5, $6, $7)
-        RETURNING username, first_name AS firstName, last_name AS lastName, email, phone_number AS phoneNumber, is_admin AS isAdmin`,
+        RETURNING username, first_name AS "firstName", last_name AS "lastName", email, phone_number AS "phoneNumber", is_admin AS "isAdmin"`,
             [
                 username,
                 hashedPassword,
@@ -198,11 +198,11 @@ class User {
     static async getAll() {
         const result = await db.query(
             `SELECT username,
-                    first_name AS firstName,
-                    last_name AS lastName,
+                    first_name AS "firstName",
+                    last_name AS "lastName",
                     email,
-                    phone_number AS phoneNumber,
-                    is_admin AS isAdmin
+                    phone_number AS "phoneNumber",
+                    is_admin AS "isAdmin"
             FROM users
             ORDER BY username`
         )
