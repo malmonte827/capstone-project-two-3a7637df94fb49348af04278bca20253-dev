@@ -2,6 +2,7 @@ const db = require("../db");
 const bcrypt = require("bcrypt")
 const { BCRYPT_WORK_FACTOR } = require("../config");
 const testUserIds = [];
+const testPetIds = []
 
 async function commonBeforeAll() {
     await db.query(`DELETE FROM pets`);
@@ -29,14 +30,17 @@ async function commonBeforeAll() {
 
     testUserIds.splice(0, 0, ...userResults.rows.map((r) => r.id));
 
-    await db.query(
+   const petResults = await db.query(
         `
         INSERT INTO pets (name, age, species, hunger, user_id)
         VALUES ('p1', 1, 'cat', 1, $1),
                ('p2', 2, 'dog', 2, $2),
-               ('p3', 3, 'bird', 3, $3)`,
+               ('p3', 3, 'bird', 3, $3)
+        RETURNING id`,
         [testUserIds[0], testUserIds[1], testUserIds[2]]
     );
+    testPetIds.splice(0, 0, ...petResults.rows.map((r) => r.id));
+
 }
 
 async function commonBeforeEach(){
@@ -54,5 +58,6 @@ module.exports = {
     commonBeforeEach,
     commonAfterEach,
     commonAfterAll,
-    testUserIds
+    testUserIds,
+    testPetIds
 }
