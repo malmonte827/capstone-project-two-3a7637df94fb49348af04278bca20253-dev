@@ -17,7 +17,7 @@ class Pet {
         const result = await db.query(
             `INSERT INTO pets (name, age, species, user_id)
             VALUES ($1, $2, $3, $4)
-            RETURNING id, name, age, species, hunger, user_id AS userId`,
+            RETURNING id, name, age, species, hunger, user_id AS "userId"`,
             [data.name, data.age, data.species, data.user_id]
         )
         const pet = result.rows[0]
@@ -40,7 +40,7 @@ class Pet {
         const updateQuery = `UPDATE pets
                             SET ${setCols}
                             WHERE id = ${idIdx}
-                            RETURNING id, name, age, species, hunger, user_id AS userId`
+                            RETURNING id, name, age, species, hunger, user_id AS "userId"`
         
         const result = await db.query(updateQuery, [...values, id])
 
@@ -62,7 +62,7 @@ class Pet {
      */
     static async get(id){
         const result = await db.query(
-            `SELECT id, name, age, species, hunger, user_id AS userId
+            `SELECT id, name, age, species, hunger, user_id AS "userId"
             FROM pets
             WHERE id = $1`,
             [id]
