@@ -198,3 +198,34 @@ describe("get", function () {
     });
 });
 
+/****************************************************** getAll */
+
+describe("getAll", function () {
+    it("works", async function () {
+        const users = await User.getAll()
+        expect(users).toEqual([
+            {
+                username: "u1",
+                firstName: "u1fn",
+                lastName: "u1ln",
+                email: "u1@email.com",
+                phoneNumber: "1234567890",
+                isAdmin: false,
+            },{
+                username: "u2",
+                firstName: "u2fn",
+                lastName: "u2ln",
+                email: "u2@email.com",
+                phoneNumber: "987654321",
+                isAdmin: false,
+            },{
+                username: "u3",
+                firstName: "u3fn",
+                lastName: "u3ln",
+                email: "u3@email.com",
+                phoneNumber: "1029384756",
+                isAdmin: false,
+            }]
+        )
+    })
+})
