@@ -73,4 +73,28 @@ describe("update", function () {
     });
 });
 
+/****************************************************** get */
+
+describe("get", function () {
+    it("works", async function () {
+        const pet = await Pet.get(testPetIds[0]);
+        expect(pet).toEqual({
+            id: testPetIds[0],
+            name: "p1",
+            age: 1,
+            species: "cat",
+            hunger: 1,
+            userId: testUserIds[0],
+        });
+    });
+
+    test("not found: no known pet", async function () {
+        expect.assertions(1);
+        try {
+            await Pet.get(0);
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    });
+});
 
