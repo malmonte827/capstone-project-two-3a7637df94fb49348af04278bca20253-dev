@@ -36,4 +36,41 @@ describe("create", function () {
     });
 });
 
+/****************************************************** update */
+
+describe("update", function () {
+    const updateData = {
+        name: "new",
+        age: 999,
+        hunger: 55,
+        species: "newSpecies",
+    };
+    it("works", async function () {
+        const update = await Pet.update(testPetIds[0], updateData);
+        expect(update).toEqual({
+            ...updateData,
+            id: testPetIds[0],
+            userId: testUserIds[0],
+        });
+    });
+
+    test("not found: no known pet", async function () {
+        expect.assertions(1);
+        try {
+            await Pet.update(0, { name: "nonPet" });
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    });
+
+    test("bad request: no data", async function () {
+        expect.assertions(1);
+        try {
+            await Pet.update(testPetIds[0], {});
+        } catch (err) {
+            expect(err instanceof BadRequestError).toBeTruthy();
+        }
+    });
+});
+
 
