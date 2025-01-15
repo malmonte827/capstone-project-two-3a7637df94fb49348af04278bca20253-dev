@@ -98,3 +98,23 @@ describe("get", function () {
     });
 });
 
+/****************************************************** remove */
+
+describe("remove", function () {
+    it("works", async function () {
+        await Pet.remove(testPetIds[0]);
+        const result = await db.query(`SELECT *  FROM pets WHERE id=$1`, [
+            testPetIds[0],
+        ]);
+        expect(result.rows.length).toEqual(0);
+    });
+
+    test("not found: no known pet", async function () {
+        expect.assertions(1);
+        try {
+            await Pet.remove(0);
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    });
+});
