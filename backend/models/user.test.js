@@ -172,3 +172,29 @@ describe("remove", function () {
         }
     });
 });
+
+/****************************************************** get */
+
+describe("get", function () {
+    it("work", async function () {
+        const user = await User.get("u1");
+        expect(user).toEqual({
+            username: "u1",
+            firstName: "u1fn",
+            lastName: "u1ln",
+            email: "u1@email.com",
+            phoneNumber: "1234567890",
+            isAdmin: false,
+        });
+    });
+
+    test("not found: no known user", async function () {
+        expect.assertions(1);
+        try {
+            await User.get("nonUser");
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy()
+        }
+    });
+});
+
