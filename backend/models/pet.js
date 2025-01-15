@@ -14,7 +14,7 @@ class Pet {
     */
 
     static async create(data){
-        const result = db.query(
+        const result = await db.query(
             `INSERT INTO pets (name, age, species, user_id)
             VALUES ($1, $2, $3, $4)
             RETURNING id, name, age, species, hunger, user_id AS userId`,
