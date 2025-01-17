@@ -5,12 +5,14 @@ const User = require("../models/user");
 const Pet = require("../models/pet")
 const { createToken } = require("../helpers/token");
 
+let testUserIds = []
+
 async function commonBeforeAll() {
     await db.query("DELETE FROM users");
 
     await db.query("DELETE FROM pets");
 
-   const u1 = await User.register({
+       await User.register({
         username: "u1",
         password: "password1",
         firstName: "u1fn",
@@ -19,7 +21,7 @@ async function commonBeforeAll() {
         phoneNumber: 1111111111,
         isAdmin: false,
     });
-   const u2 = await User.register({
+       await User.register({
         username: "u2",
         password: "password2",
         firstName: "u2fn",
@@ -28,7 +30,7 @@ async function commonBeforeAll() {
         phoneNumber: 2222222222,
         isAdmin: false,
     });
-   const u3 = await User.register({
+       await User.register({
         username: "u3",
         password: "password3",
         firstName: "u3fn",
@@ -37,13 +39,16 @@ async function commonBeforeAll() {
         phoneNumber: 333333333,
         isAdmin: false,
     });
+    const userResults = await db.query(`SELECT id FROM users WHERE username like 'u%'`);
+    
+    testUserIds.splice(0, 0, ...userResults.rows.map((r) => r.id))
 
     await Pet.create({
         name: "p1",
         age: 1,
         species: "cat",
         hunger: 1,
-        userId: u1.id
+        user_id: testUserIds[0]
     })
 
     await Pet.create({        
@@ -51,14 +56,14 @@ async function commonBeforeAll() {
         age: 2,
         species: "dog",
         hunger: 2,
-        userId: u2.id
+        user_id: testUserIds[1]
     })
     await Pet.create({        
         name: "p3",
         age: 3,
         species: "bird",
         hunger: 3,
-        userId: u3.id
+        user_id: testUserIds[2]
     })
 }
 
