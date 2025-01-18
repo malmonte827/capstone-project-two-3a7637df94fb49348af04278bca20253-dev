@@ -57,7 +57,22 @@ router.get("/", ensureAdmin, async function (req, res, next){
     }
 } )
 
+/** GET /[username] => {user} 
+ * 
+ * Returns {username, firstName, lastName, email, isAdmin, pets}
+ *      where pets is {id, name, age, species, hunger}
+ * 
+ * Authorization level: admin or same user as username
+*/
 
+router.get("/:username", ensureCorrectUserOrAdmin, async function (req, rres, next) {
+    try{
+        const user = await User.get(req.params.username)
+        return res.json({ user })
+    }catch(err){
+        return next(err)
+    }
+  })
 
 
 module.exports = router
