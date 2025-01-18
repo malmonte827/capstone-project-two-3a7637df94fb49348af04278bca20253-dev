@@ -96,4 +96,18 @@ router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, nex
     }
   })
 
+  /** DELETE /[username] => {deleted: username}
+   * 
+   * Authorization level: admin or same user as username
+   */
+
+  router.delete("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
+    try{
+        await User.remove(req.params.username)
+        return res.json({deleted: req.params.username})
+    }catch(err){
+        return next(err)
+    }
+  })
+
 module.exports = router
