@@ -4,9 +4,11 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const jsonschema = require("jsonschema");
-const { ensureAdmin } = require("../middleware/auth");
+const { ensureAdmin, ensureCorrectUserOrAdmin } = require("../middleware/auth");
 const userNewSchema = require("../schemas/userNew.json");
+const userRegister = require("../schemas/userRegister.json")
 const { BadRequestError } = require("../expressError");
+const {createToken} = require("../helpers/token")
 
 /********* Routes for users ******/
 
@@ -36,6 +38,26 @@ router.post("/", ensureAdmin, async function (req, res, next) {
     } catch (err) {
         return next(err);
     }
+
 });
+
+/** GET / => {users: [ {username, fistName, lastName, email, phoneNumber}, ... ] } 
+ * 
+ * Returns list of users
+ * 
+ * Authorization level: admin
+*/
+
+router.get("/", ensureAdmin, async function (req, res, next){
+    try{
+        const users = await User.getAll()
+        return res.json({users})
+    }catch(err){
+        return next(err)
+    }
+} )
+
+
+
 
 module.exports = router
