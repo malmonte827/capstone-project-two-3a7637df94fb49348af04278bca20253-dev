@@ -352,3 +352,47 @@ describe("PATCH /users/:username", function () {
         expect(res.statusCode).toEqual(400);
     });
 });
+
+/****************************************************** DELETE /users/:username */
+
+describe("DELETE /users/:username", function () {
+    test("works: admin", async function () {
+        const res = await request(app)
+        .delete("/users/u1")
+        .set("authorization", `Bearer ${adminToken}`)
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toEqual({
+            deleted: "u1"
+        })
+    })
+
+    test("works: same user", async function () {
+        const res = await request(app)
+        .delete("/users/u1")
+        .set("authorization", `Bearer ${u1Token}`)
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toEqual({
+            deleted: "u1"
+        })
+    })
+
+    test("unauth: different user", async function () {
+        const res = await request(app)
+        .delete("/users/u1")
+        .set("authorization", `Bearer ${u2Token}`)
+        expect(res.statusCode).toEqual(401)
+    })
+
+    test("unauth: non User", async function () {
+        const res = await request(app)
+        .delete("/users/u1")
+        expect(res.statusCode).toEqual(401)
+    })
+
+    test("not found: no such user", async function () {
+        const res = await request(app)
+        .delete("/users/nonUser")
+        .set("authorization", `Bearer ${adminToken}`)
+        expect(res.statusCode).toEqual(404)
+    })
+})
