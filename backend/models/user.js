@@ -173,6 +173,7 @@ class User {
     static async get(username) {
         const result = await db.query(
             `SELECT username,
+                    id,
                     first_name AS "firstName",
                     last_name AS "lastName",
                     email,
@@ -188,6 +189,15 @@ class User {
         if (!user) {
             throw new NotFoundError(`No user: ${username}`);
         }
+
+        const userPetsRes = await db.query(
+            `SELECT p.id
+            FROM pets AS p
+            WHERE p.user_id = $1`, [user.id]
+        )
+
+        user.pets = userPetsRes.rows.map(p => p.id)
+
         return user;
     }
 
