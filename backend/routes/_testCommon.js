@@ -6,6 +6,7 @@ const Pet = require("../models/pet")
 const { createToken } = require("../helpers/token");
 
 let testUserIds = []
+let testPetIds = []
 
 async function commonBeforeAll() {
     await db.query("DELETE FROM users");
@@ -39,7 +40,7 @@ async function commonBeforeAll() {
         phoneNumber: 333333333,
         isAdmin: false,
     });
-    const userResults = await db.query(`SELECT id FROM users WHERE username like 'u%'`);
+    const userResults = await db.query(`SELECT id FROM users `);
     
     testUserIds.splice(0, 0, ...userResults.rows.map((r) => r.id))
 
@@ -65,6 +66,10 @@ async function commonBeforeAll() {
         hunger: 3,
         user_id: testUserIds[2]
     })
+    const petResults = await db.query(`SELECT id FROM pets`)
+
+    testPetIds.splice(0, 0, ...petResults.rows.map((r) => r.id))
+
 }
 
 const u1Token = createToken({username: "u1", isAdmin: false})
@@ -92,5 +97,6 @@ module.exports = {
     u1Token,
     u2Token,
     u3Token,
-    adminToken
+    adminToken,
+    testPetIds
 }
