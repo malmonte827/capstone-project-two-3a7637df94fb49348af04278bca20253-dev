@@ -15,6 +15,7 @@ const {
     u2Token,
     u3Token,
     adminToken,
+    testPetIds,
 } = require("./_testCommon");
 
 beforeAll(commonBeforeAll);
@@ -192,3 +193,67 @@ describe("GET /users", function () {
         expect(res.statusCode).toEqual(401)
     })
 });
+
+/****************************************************** GET /users/:username */
+
+describe("GET /users/:username", function () {
+    test("works for admin", async function () {
+        const res = await request(app)
+            .get("/users/u1")
+            .set("authorization", `Bearer ${adminToken}`)
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toEqual({
+            user : {
+                username: "u1",
+                id: expect.any(Number),
+                firstName: "u1fn",
+                lastName: "u1ln",
+                email: "u1@email.com",
+                phoneNumber: '1111111111',
+                isAdmin: false,
+                pets: [testPetIds[0]]
+            }
+        })
+    })
+
+    test("works for same user", async function () {
+        const res = await request(app)
+            .get("/users/u1")
+            .set("authorization", `Bearer ${u1Token}`)
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toEqual({
+            user : {
+                username: "u1",
+                id: expect.any(Number),
+                firstName: "u1fn",
+                lastName: "u1ln",
+                email: "u1@email.com",
+                phoneNumber: '1111111111',
+                isAdmin: false,
+                pets: [testPetIds[0]]
+            }
+        })
+    })
+
+    test("unauth for other user", async function () {
+        const res = await request(app)
+            .get("/users/u1")
+            .set("authorization", `Bearer ${u2Token}`)
+        expect(res.statusCode).toEqual(401)
+    })
+
+    test("unauth for nonUser", async function () {
+        const res = await request(app)
+            .get("/users/u1")
+            expect(res.statusCode).toEqual(401)
+    })
+
+    test("not found if user not found", async function () {
+        const res = await request(app)
+            .get("/users/notUser")
+            .set("authorization", `Bearer ${adminToken}`)
+            expect(res.statusCode).toEqual(404)
+    })
+})
+
+
