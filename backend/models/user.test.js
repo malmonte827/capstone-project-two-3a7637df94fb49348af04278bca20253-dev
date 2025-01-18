@@ -14,6 +14,7 @@ const {
     commonAfterEach,
     commonAfterAll,
     testUserIds,
+    testPetIds,
 } = require("./_testCommon");
 
 beforeAll(commonBeforeAll);
@@ -180,11 +181,13 @@ describe("get", function () {
         const user = await User.get("u1");
         expect(user).toEqual({
             username: "u1",
+            id: expect.any(Number),
             firstName: "u1fn",
             lastName: "u1ln",
             email: "u1@email.com",
             phoneNumber: "1234567890",
             isAdmin: false,
+            pets: [testPetIds[0]]
         });
     });
 
