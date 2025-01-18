@@ -5,10 +5,10 @@
     "required": [
         "username",
         "password",
-        "first_name",
-        "last_name",
+        "firstName",
+        "lastName",
         "email",
-        "phone_number"
+        "phoneNumber"
     ],
     "properties": {
         "username": {
@@ -21,12 +21,12 @@
             "minLength": 8,
             "maxLength": 24
         },
-        "first_name": {
+        "firstName": {
             "type": "string",
             "minLength": 1,
             "maxLength": 30
         },
-        "last_name": {
+        "lastName": {
             "type": "string",
             "minLength": 1,
             "maxLength": 30
@@ -37,13 +37,12 @@
             "maxLength": 100,
             "format": "email"
         },
-        "phone_number": {
+        "phoneNumber": {
             "type": "string",
             "minLength": 10,
-            "maxLength": 20,
-            "pattern": "^(\\\\([0-9]{3}\\\\))?[0-9]{3}-[0-9]{4}$"
+            "maxLength": 20
         },
-        "is_admin": {
+        "isAdmin": {
             "type": "boolean"
         }
     },
