@@ -12,7 +12,7 @@ CREATE TABLE users (
 CREATE TABLE pets (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    age SMALLINT,
+    age INTEGER,
     species TEXT NOT NULL,
     hunger INTEGER NOT NULL DEFAULT 100,
     user_id INTEGER NOT NULL 
