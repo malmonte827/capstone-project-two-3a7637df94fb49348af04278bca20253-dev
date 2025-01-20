@@ -6,7 +6,8 @@
     "required": [
         "name",
         "age",
-        "species"
+        "species",
+        "user_id"
     ],
     "properties": {
         "name": {
@@ -15,7 +16,7 @@
             "maxLength": 30
         },
         "age": {
-            "type": "string",
+            "type": "integer",
             "minLength": 1,
             "maxLength": 30
         },
@@ -27,6 +28,9 @@
         "hunger": {
             "minimum": 0,
             "maximum": 10
+        },
+        "user_id": {
+            "type": "integer"
         }
     },
     "additionalProperties": false
