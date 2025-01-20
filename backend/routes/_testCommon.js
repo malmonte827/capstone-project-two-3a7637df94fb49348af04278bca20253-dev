@@ -98,5 +98,5 @@ module.exports = {
     u2Token,
     u3Token,
     adminToken,
-    testPetIds
+    testUserIds
 }
