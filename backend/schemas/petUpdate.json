@@ -11,9 +11,9 @@
             "maxLength": 30
         },
         "age": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 30
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
         },
         "species": {
             "type": "string",
@@ -22,7 +22,7 @@
         },
         "hunger": {
             "minimum": 0,
-            "maximum": 10
+            "maximum": 100
         }
     },
     "additionalProperties": false
