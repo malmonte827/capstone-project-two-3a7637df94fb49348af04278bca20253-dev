@@ -323,3 +323,45 @@ describe("PATCH /pets/:id", function () {
         expect(res.statusCode).toEqual(404);
     });
 });
+
+/****************************************************** DELETE /pets/:id */
+
+describe("DELETE /pets/:id", function () {
+    test("works: admin", async function () {
+        const res = await request(app)
+        .delete(`/users/u1/pets/${testPetIds[0]}`)
+        .set("authorization", `Bearer ${adminToken}`)
+        expect(res.body).toEqual({
+            deleted: "p1"
+        })
+    })
+
+    test("works: same user", async function () {
+        const res = await request(app)
+        .delete(`/users/u1/pets/${testPetIds[0]}`)
+        .set("authorization", `Bearer ${u1Token}`)
+        expect(res.body).toEqual({
+            deleted: "p1"
+        })
+    })
+
+    test("unauth: different user", async function () {
+        const res = await request(app)
+        .delete(`/users/u1/pets/${testPetIds[0]}`)
+        .set("authorization", `Bearer ${u2Token}`)
+        expect(res.statusCode).toEqual(401)
+    })
+
+    test("unauth: non user", async function () {
+        const res = await request(app)
+        .delete(`/users/u1/pets/${testPetIds[0]}`)
+        expect(res.statusCode).toEqual(401)
+    })
+
+    test("not found: no such pet", async function () {
+        const res = await request(app)
+        .delete(`/users/u1/pets/999999999`)
+        .set("authorization", `Bearer ${adminToken}`)
+        expect(res.statusCode).toEqual(404)
+    })
+})
