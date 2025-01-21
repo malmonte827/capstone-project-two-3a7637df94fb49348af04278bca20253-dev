@@ -64,4 +64,13 @@ router.patch("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
     }
 });
 
+
+router.delete("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+    try{
+         const pet = await Pet.remove(req.params.id)
+        return res.json({deleted: `${pet.name}`})
+    }catch(err){
+        return next(err)
+    }
+})
 module.exports = router;
