@@ -115,3 +115,39 @@ describe("POST /pets", function () {
         expect(res.statusCode).toEqual(400);
     });
 });
+
+describe("GET /pets", function () {
+    test("works: admin", async function () {
+        const res = await request(app)
+            .get("/users/u1/pets")
+            .set("authorization", `Bearer ${adminToken}`);
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual({
+            pets: [{ name: "p1", age: 1, species: "cat", hunger: 100 }],
+        });
+    });
+
+    test("works: same user", async function () {
+        const res = await request(app)
+            .get("/users/u1/pets")
+            .set("authorization", `Bearer ${u1Token}`);
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual({
+            pets: [{ name: "p1", age: 1, species: "cat", hunger: 100 }],
+        });
+    });
+
+    test("unauth: different user", async function () {
+        const res = await request(app)
+            .get("/users/u1/pets")
+            .set("authorization", `Bearer ${u2Token}`);
+        expect(res.statusCode).toEqual(401);
+    });
+
+    test("unauth: non user", async function () {
+        const res = await request(app).get("/users/u1/pets");
+        expect(res.statusCode).toEqual(401);
+    });
+});
