@@ -13,6 +13,7 @@ const {
     u1Token,
     u2Token,
     adminToken,
+    testPetIds,
 } = require("./_testCommon");
 
 beforeAll(commonBeforeAll);
@@ -116,6 +117,8 @@ describe("POST /pets", function () {
     });
 });
 
+/****************************************************** GET /pets */
+
 describe("GET /pets", function () {
     test("works: admin", async function () {
         const res = await request(app)
@@ -149,5 +152,62 @@ describe("GET /pets", function () {
     test("unauth: non user", async function () {
         const res = await request(app).get("/users/u1/pets");
         expect(res.statusCode).toEqual(401);
+    });
+});
+
+/****************************************************** GET /pets/:id */
+
+describe("GET /pets/:id", function () {
+    test("works: admin", async function () {
+        const res = await request(app)
+            .get(`/users/u1/pets/${testPetIds[0]}`)
+            .set("authorization", `Bearer ${adminToken}`);
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual({
+            pet: {
+                id: testPetIds[0],
+                name: "p1",
+                age: 1,
+                species: "cat",
+                hunger: 100,
+                userId: testUserIds[0],
+            },
+        });
+    });
+
+    test("works: same user", async function () {
+        const res = await request(app)
+            .get(`/users/u1/pets/${testPetIds[0]}`)
+            .set("authorization", `Bearer ${u1Token}`);
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual({
+            pet: {
+                id: testPetIds[0],
+                name: "p1",
+                age: 1,
+                species: "cat",
+                hunger: 100,
+                userId: testUserIds[0],
+            },
+        });
+    });
+
+    test("unauth: different user", async function () {
+        const res = await request(app)
+            .get(`/users/u1/pets/${testPetIds[0]}`)
+            .set("authorization", `Bearer ${u2Token}`);
+        expect(res.statusCode).toEqual(401);
+    });
+
+    test("unauth: non user", async function () {
+        const res = await request(app).get(`/users/u1/pets/${testPetIds[0]}`);
+        expect(res.statusCode).toEqual(401);
+    });
+
+    test("not found: no such pet", async function () {
+        const res = await request(app)
+            .get(`/users/u1/pets/1111111`)
+            .set("authorization", `Bearer ${adminToken}`);
+        expect(res.statusCode).toEqual(404);
     });
 });
