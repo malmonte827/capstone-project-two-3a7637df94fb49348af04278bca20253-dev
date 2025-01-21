@@ -1,7 +1,7 @@
 "use strict"
 
 const express = require("express")
-const router = express.Router()
+const router = express.Router({mergeParams: true})
 const Pet = require("../models/pet")
 const {ensureCorrectUserOrAdmin} = require("../middleware/auth")
 const jsonschema = require("jsonschema")
@@ -26,6 +26,15 @@ router.post("/", ensureCorrectUserOrAdmin, async function (req, res, next) {
 
         const pet = await Pet.create(req.body)
         return res.status(201).json({pet})
+    }catch(err){
+        return next(err)
+    }
+})
+
+router.get("/", ensureCorrectUserOrAdmin, async function(req, res, next) {
+    try{
+        const pets = await Pet.getAll(req.params.username)
+        return res.status(200).json({pets})
     }catch(err){
         return next(err)
     }
