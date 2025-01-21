@@ -6,6 +6,7 @@ const Pet = require("../models/pet");
 const { ensureCorrectUserOrAdmin } = require("../middleware/auth");
 const jsonschema = require("jsonschema");
 const petNewSchema = require("../schemas/petNew.json");
+const petUpdateSchema = require("../schemas/petUpdate.json");
 const { BadRequestError } = require("../expressError");
 /** Routes for pets */
 
@@ -43,6 +44,20 @@ router.get("/", ensureCorrectUserOrAdmin, async function (req, res, next) {
 router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
     try {
         const pet = await Pet.get(req.params.id);
+        return res.status(200).json({ pet });
+    } catch (err) {
+        return next(err);
+    }
+});
+
+router.patch("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+    try {
+        const validator = jsonschema.validate(req.body, petUpdateSchema);
+        if (!validator.valid) {
+            const errs = validator.errors.map((e) => e.stack);
+            throw new BadRequestError(errs);
+        }
+        const pet = await Pet.update(req.params.id, req.body);
         return res.status(200).json({ pet });
     } catch (err) {
         return next(err);
