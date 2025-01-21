@@ -107,7 +107,7 @@ class Pet {
             `DELETE
             FROM pets
             WHERE id = $1
-            RETURNING id`,
+            RETURNING name`,
             [id]
         )
 
@@ -116,6 +116,8 @@ class Pet {
         if(!pet){
             throw new NotFoundError(`No pet: ${id}`)
         }
+
+        return pet
     }
 }
 
