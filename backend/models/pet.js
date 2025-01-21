@@ -53,6 +53,23 @@ class Pet {
         return pet
     }
 
+    /** Get all pets of user
+     * 
+     * Returns [{name, age, species, hunger}, ...]
+     * 
+     */
+    static async getAll(username){
+        const result = await db.query(
+            `SELECT  name, age, species, hunger 
+            FROM pets 
+            JOIN users ON pets.user_id = users.id 
+            WHERE users.username = $1`,
+            [username]
+        )
+        return result.rows
+
+
+    }
 
     /** Get pet data
      * 
