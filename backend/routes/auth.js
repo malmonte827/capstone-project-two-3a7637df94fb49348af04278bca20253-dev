@@ -5,6 +5,7 @@ const express = require("express");
 const router = express.Router();
 const jsonschema = require("jsonschema");
 const userRegisterSchema = require("../schemas/userRegister.json");
+const userAuthSchema = require("../schemas/userAuth.json");
 const { BadRequestError } = require("../expressError");
 const { createToken } = require("../helpers/token");
 
@@ -33,4 +34,28 @@ router.post("/register", async function (req, res, next) {
     }
 });
 
-module.exports = router
+/** POST /auth/token {username, password} => {token}
+ *
+ *  Returns JWT
+ *
+ * Authorization level: none
+ */
+
+router.post("/token", async function (req, res, next) {
+    try {
+        const validator = jsonschema.validate(req.body, userAuthSchema);
+        if (!validator.valid) {
+            const errs = validator.errors.map((e) => e.stack);
+            throw new BadRequestError(errs);
+        }
+
+        const { username, password } = req.body;
+        const user = await User.authenticate(username, password);
+        const token = createToken(user);
+        return res.status(200).json({ token });
+    } catch (err) {
+        return next(err);
+    }
+});
+
+module.exports = router;
