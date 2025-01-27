@@ -65,8 +65,14 @@ function App() {
      * Automatically logs in user after signup
      */
     async function signup(signupData){
-        let token = await CapstoneApi.signup(signupData)
+        const token = await CapstoneApi.signup(signupData)
         setToken(token)
+    }
+
+    /** Handles loging in users*/
+    async function login(loginData){
+        const token = await CapstoneApi.login(loginData)
+        setToken(token) 
     }
 
     returns(<></>);
