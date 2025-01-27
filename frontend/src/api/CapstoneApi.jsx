@@ -26,4 +26,13 @@ class CapstoneApi{
             throw Array.isArray(message) ? message : [message]
         }
     }
+
+    /** API ROUTES */
+
+    /** Get the current user */
+
+    static async getCurrentUser(username){
+        let res = await this.request(`/users/${username}`)
+        return res.user
+    }
 }
