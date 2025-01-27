@@ -36,9 +36,15 @@ class CapstoneApi{
         return res.user
     }
 
-/** Signup user */
+/** Signup User */
     static async signup(data){
         let res = await this.request(`/auth/register`, data, "post")
+        return res.token
+    }
+
+    /** Login User */
+    static async login(data){
+        const res = await this.request(`/auth/token`, data, "post")
         return res.token
     }
 }
