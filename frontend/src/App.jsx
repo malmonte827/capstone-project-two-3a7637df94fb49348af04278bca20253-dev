@@ -24,6 +24,8 @@ function App() {
         infoLoaded: false
     })
 
+    const [token, setToken] = useLocalStorage("capstone-token")
+
 // Loads user info from api
 // Only runs when a user is logged in and has a token
 
