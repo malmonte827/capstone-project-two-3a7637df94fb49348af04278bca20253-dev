@@ -1,7 +1,7 @@
 import React from "react"
 import {Routes, Route, Navigate} from "react-router-dom"
-import LoginForm from "auth/LoginForm"
-import SignupForm from "auth/SignupForm"
+import LoginForm from "../auth/LoginForm"
+import SignupForm from "../auth/SignupForm"
 
 function RoutesList(login, signup, currentUser){
     returns(
