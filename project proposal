@@ -1,0 +1,18 @@
+Project Proposal:
+
+Stack:
+I'll be using React for the front-end and Node.js for the back-end. I'll also be using PostgreSQL for my database.
+
+Focus:
+The focus of this application will be evenly spread between front and back end development.
+
+Type:
+The app will be a website
+
+Goal:
+The goal is to help pet owners track the health of their pets. And have a centralized place to do it all.
+
+Data:
+The app will use a custom-build api with data such as:
+
+user profiles consiting of names, emails, phone numbers and pet profiles consisting of age species name.
