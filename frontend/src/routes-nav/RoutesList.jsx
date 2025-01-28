@@ -2,9 +2,10 @@ import React from "react"
 import {Routes, Route, Navigate} from "react-router-dom"
 import LoginForm from "../auth/LoginForm"
 import SignupForm from "../auth/SignupForm"
+import Homepage from "../homepage/Homepage"
 
 function RoutesList(login, signup, currentUser){
-    returns(
+    return(
         <div className="pt-5">
             <Routes>
                 {!currentUser &&
