@@ -126,6 +126,7 @@ function SignupForm({ signup }) {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
+                                    autoComplete="email"
                                 />
                             </div>
                             <div className="mb-3">
@@ -141,6 +142,7 @@ function SignupForm({ signup }) {
                                     name="username"
                                     value={formData.phoneNumber}
                                     onChange={handleChange}
+                                    autoComplete="tel"
                                 />
                             </div>
 
