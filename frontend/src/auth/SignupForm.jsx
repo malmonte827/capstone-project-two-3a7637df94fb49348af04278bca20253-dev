@@ -67,6 +67,7 @@ function SignupForm({ signup }) {
                                     name="username"
                                     value={formData.username}
                                     onChange={handleChange}
+                                    autoComplete="username"
                                 />
                             </div>
                             <div className="mb-3">
@@ -82,6 +83,7 @@ function SignupForm({ signup }) {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}
+                                    autoComplete="new-password"
                                 />
                             </div>
                             <div className="mb-3">

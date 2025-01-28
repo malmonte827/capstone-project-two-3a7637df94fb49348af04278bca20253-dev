@@ -62,6 +62,8 @@ function LoginForm({ login }) {
                                     name="username"
                                     value={formData.username}
                                     onChange={handleChange}
+                                    autoComplete="username"
+                                    required
                                 />
                             </div>
                             <div className="mb-3">
@@ -77,6 +79,9 @@ function LoginForm({ login }) {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}
+                                    autoComplete="current-password"
+                                    required
+
                                 />
                             </div>
 
