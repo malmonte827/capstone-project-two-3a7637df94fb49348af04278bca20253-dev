@@ -27,12 +27,20 @@ function App() {
     });
 
     const [token, setToken] = useLocalStorage("capstone-token");
+    console.debug(
+        "App",
+        "currentUser=",
+        currentUser,
+        "token=",
+        token
+      );
 
     // Loads user info from api
     // Only runs when a user is logged in and has a token
 
     useEffect(
         function loadUserInfo() {
+            console.debug("App useEffect loadUserInfo", "token=", token);
             async function getCurrentUser() {
                 if (token) {
                     try {
@@ -47,6 +55,7 @@ function App() {
                             infoLoaded: true,
                         });
                     } catch (err) {
+                        console.error("App loadUserInfo: problem loading", err);
                         setCurrentUser({
                             data: null,
                             infoLoaded: true,
@@ -59,7 +68,7 @@ function App() {
                     });
                 }
             }
-            getCurrentUser;
+            getCurrentUser();
         },
         [token]
     );
@@ -90,7 +99,7 @@ function App() {
         setToken(null);
     }
 
-    returns(
+    return(
         <UserContext.Provider
             value={{
                 currentUser: currentUser.data,
