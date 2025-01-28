@@ -4,14 +4,14 @@ import LoginForm from "../auth/LoginForm"
 import SignupForm from "../auth/SignupForm"
 import Homepage from "../homepage/Homepage"
 
-function RoutesList(login, signup, currentUser){
+function RoutesList({login, signup, currentUser}){
     return(
         <div className="pt-5">
             <Routes>
                 {!currentUser &&
                 <>
-                <Route path="/signup" element={<LoginForm login={login}/>}/>
-                <Route path="/login" element={<SignupForm signup={signup}/>}/>
+                <Route path="/login" element={<LoginForm login={login}/>}/>
+                <Route path="/signup" element={<SignupForm signup={signup}/>}/>
                 </>}
                 <Route path="/" element={<Homepage/>}/>
                 <Route path="*" element={<Navigate to="/"/>}/>
