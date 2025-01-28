@@ -139,7 +139,7 @@ function SignupForm({ signup }) {
                                 <input
                                     className="form-control"
                                     type="tel"
-                                    name="username"
+                                    name="phoneNumber"
                                     value={formData.phoneNumber}
                                     onChange={handleChange}
                                     autoComplete="tel"
