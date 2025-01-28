@@ -59,6 +59,7 @@ function LoginForm({ login }) {
                                 <input
                                     className="form-control"
                                     type="text"
+                                    id="username"
                                     name="username"
                                     value={formData.username}
                                     onChange={handleChange}
@@ -76,6 +77,7 @@ function LoginForm({ login }) {
                                 <input
                                     className="form-control"
                                     type="password"
+                                    id="password"
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}

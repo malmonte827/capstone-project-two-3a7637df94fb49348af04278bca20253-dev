@@ -64,6 +64,7 @@ function SignupForm({ signup }) {
                                 <input
                                     className="form-control"
                                     type="text"
+                                    id="username"
                                     name="username"
                                     value={formData.username}
                                     onChange={handleChange}
@@ -80,6 +81,7 @@ function SignupForm({ signup }) {
                                 <input
                                     className="form-control"
                                     type="password"
+                                    id="password"
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}
@@ -96,6 +98,7 @@ function SignupForm({ signup }) {
                                 <input
                                     className="form-control"
                                     type="text"
+                                    id="firstName"
                                     name="firstName"
                                     value={formData.firstName}
                                     onChange={handleChange}
@@ -111,6 +114,7 @@ function SignupForm({ signup }) {
                                 <input
                                     className="form-control"
                                     type="text"
+                                    id="lastName"
                                     name="lastName"
                                     value={formData.lastName}
                                     onChange={handleChange}
@@ -123,6 +127,7 @@ function SignupForm({ signup }) {
                                 <input
                                     className="form-control"
                                     type="email"
+                                    id="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
@@ -139,6 +144,7 @@ function SignupForm({ signup }) {
                                 <input
                                     className="form-control"
                                     type="tel"
+                                    id="phoneNumber"
                                     name="phoneNumber"
                                     value={formData.phoneNumber}
                                     onChange={handleChange}
