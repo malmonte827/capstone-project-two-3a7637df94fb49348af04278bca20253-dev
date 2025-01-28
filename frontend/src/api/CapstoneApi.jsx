@@ -32,19 +32,19 @@ class CapstoneApi{
     /** Get the current user */
 
     static async getCurrentUser(username){
-        let res = await this.request(`/users/${username}`)
+        let res = await this.request(`users/${username}`)
         return res.user
     }
 
 /** Signup User */
     static async signup(data){
-        let res = await this.request(`/auth/register`, data, "post")
+        let res = await this.request(`auth/register`, data, "post")
         return res.token
     }
 
     /** Login User */
     static async login(data){
-        const res = await this.request(`/auth/token`, data, "post")
+        const res = await this.request(`auth/token`, data, "post")
         return res.token
     }
 }
