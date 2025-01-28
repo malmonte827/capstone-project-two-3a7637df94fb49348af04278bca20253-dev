@@ -18,7 +18,7 @@ const initialValue = localStorage.getItem(key) || firstValue
     useEffect(
         function setKeyInLocalstorage(){
             if(item === null){
-                localStorage.remove(key)
+                localStorage.removeItem(key)
             } else{
                 localStorage.setItem(key, item)
             }

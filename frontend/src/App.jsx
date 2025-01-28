@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import decode from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import CapstoneApi from "./api/CapstoneApi";
 import useLocalStorage from "./hooks/useLocalStorage";
 import LoadingSpinner from "./common/LoadingSpinner";
@@ -36,7 +36,7 @@ function App() {
             async function getCurrentUser() {
                 if (token) {
                     try {
-                        let { username } = decode(token);
+                        let { username } = jwtDecode(token);
                         CapstoneApi.token = token;
                         let currentUser = await CapstoneApi.getCurrentUser(
                             username

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert"
 
 /** Login Form
@@ -19,6 +19,8 @@ function LoginForm({ login }) {
     });
 
     const [formErrors, setFormErrors] = useState([]);
+
+    const navigate = useNavigate()
 
     /** Handles updating form fields on change */
     function handleChange(evt) {
