@@ -60,7 +60,7 @@ class Pet {
      */
     static async getAll(username){
         const result = await db.query(
-            `SELECT  name, age, species, hunger 
+            `SELECT  pets.id AS pet_id, name, age, species, hunger, user_id
             FROM pets 
             JOIN users ON pets.user_id = users.id 
             WHERE users.username = $1`,
