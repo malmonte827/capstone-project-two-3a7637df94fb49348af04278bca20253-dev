@@ -16,7 +16,7 @@
             "maxLength": 30
         },
         "age": {
-            "type": "integer",
+            "type": "string",
             "minLength": 1,
             "maxLength": 30
         },
