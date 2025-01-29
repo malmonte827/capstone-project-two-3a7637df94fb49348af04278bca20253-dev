@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert"
+import "./SignupForm.css"
 
 /** Signup Form
  *
- * Shows form and handles update sto state on changes
+ * Shows form and handles updates to state on changes
  *
  * onSubmit calls signup function prop
  *
@@ -27,15 +28,25 @@ function SignupForm({ signup }) {
     const navigate = useNavigate()
 
 
-    /** Handles updating form fields on change */
+    /** 
+     * Handles form input changes.
+     * Updates the corresponding form field in state.
+     *
+     * @param {Object} evt - Event object from input field change.
+     */
     function handleChange(evt) {
         const { name, value } = evt.target;
         setFormData((data) => ({ ...data, [name]: value }));
     }
 
-    /** handles form submition
+    /** 
+     * Handles form submission.
      *
-     * If succesful calls signup prop function and if not sets error
+     * Calls the signup function prop with form data.
+     * If signup is successful, navigates the user to the homepage.
+     * If signup fails, catches the error and updates `formErrors` state.
+     *
+     * @param {Object} evt - Form submission event.
      */
     async function handleSubmit(evt) {
         evt.preventDefault();
@@ -43,7 +54,8 @@ function SignupForm({ signup }) {
             await signup(formData);
             navigate("/");
         } catch (err) {
-            setFormErrors(err);
+            const errors = Array.isArray(err) ? err : [err.message || "An error occurred"];
+            setFormErrors(errors);
         }
     }
 

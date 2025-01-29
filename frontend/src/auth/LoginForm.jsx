@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert"
+import "./LoginForm.css"
 
 /** Login Form
  *
- * Shows form and handles update sto state on changes
+ * Shows form and handles updates to state on changes
  *
  * onSubmit calls login function prop
  *
@@ -22,15 +23,25 @@ function LoginForm({ login }) {
 
     const navigate = useNavigate()
 
-    /** Handles updating form fields on change */
+    /** 
+     * Handles form input changes.
+     * Updates the corresponding form field in state.
+     *
+     * @param {Object} evt - Event object from input field change.
+     */
     function handleChange(evt) {
         const { name, value } = evt.target;
         setFormData((data) => ({ ...data, [name]: value }));
     }
 
-    /** handles form submition
+    /** 
+     * Handles form submission.
      *
-     * If succesful calls signup prop function and if not sets error
+     * Calls the login function prop with form data.
+     * If login is successful, navigates the user to the homepage.
+     * If login fails, catches the error and updates `formErrors` state.
+     *
+     * @param {Object} evt - Form submission event.
      */
     async function handleSubmit(evt) {
         evt.preventDefault();
@@ -38,7 +49,8 @@ function LoginForm({ login }) {
             await login(formData);
             navigate("/");
         } catch (err) {
-            setFormErrors(err);
+            const errors = Array.isArray(err) ? err : [err.message || "An error occurred"];
+            setFormErrors(errors);
         }
     }
 

@@ -1,8 +1,7 @@
 import React from "react";
 
-/** Alert component provides alert feedback messages to other components
- *
- * { SignupForm , LoginForm  }
+/** 
+ * Alert component provides alert feedback messages to other components
  */
 
 function Alert({ type = "danger", messages = [] }) {

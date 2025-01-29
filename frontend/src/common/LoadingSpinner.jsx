@@ -1,4 +1,11 @@
 import Spinner from 'react-bootstrap/Spinner';
+import "./LoadingSpinner.css"
+
+/**LoadingSpinner component
+ * 
+ * Shows a spinner loader when content is loading
+ */
+
 
 function LoadingSpinner() {
   return (

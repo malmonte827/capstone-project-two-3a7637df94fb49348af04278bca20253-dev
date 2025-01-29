@@ -8,6 +8,10 @@ import {useEffect, useState} from 'react'
  * useEffect re-runs when item is changed
  * if new state is null it will remove from local storage
  * else it will update
+ * 
+ * @param {string} key - The local storage key.
+ * @param {any} firstValue - The default value if no value is found in local storage.
+ * @returns {[any, Function]} - The stateful value and a function to update it.
  */
 
 function useLocalStorage(key, firstValue = null){

@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../auth/UserContext";
+import "./Homepage.css"
 
 /** Homepage
  *
- * Shows welcom message or login/signup buttons
- *
+ * If the user is logged in, it greets them by their first name or username.
+ * If the user is not logged in, it shows login and signup buttons.
+ * 
  * Routes -> Homepage
  *
  * Routed at /
