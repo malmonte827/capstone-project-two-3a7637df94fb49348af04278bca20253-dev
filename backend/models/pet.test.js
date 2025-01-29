@@ -22,7 +22,7 @@ afterAll(commonAfterAll);
 describe("create", function () {
     const newPet = {
         name: "new",
-        age: 1,
+        age: "1",
         species: "newSpecies",
     };
     it("works", async function () {
@@ -41,7 +41,7 @@ describe("create", function () {
 describe("update", function () {
     const updateData = {
         name: "new",
-        age: 999,
+        age: "999",
         hunger: 55,
         species: "newSpecies",
     };
@@ -81,7 +81,7 @@ describe("get", function () {
         expect(pet).toEqual({
             id: testPetIds[0],
             name: "p1",
-            age: 1,
+            age: "1",
             species: "cat",
             hunger: 1,
             userId: testUserIds[0],
