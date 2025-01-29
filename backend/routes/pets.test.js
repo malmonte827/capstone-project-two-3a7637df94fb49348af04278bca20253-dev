@@ -30,7 +30,7 @@ describe("POST /pets", function () {
             .set("authorization", `Bearer ${adminToken}`)
             .send({
                 name: "newPet",
-                age: 2,
+                age: "2",
                 species: "pet",
                 user_id: testUserIds[1],
             });
@@ -38,7 +38,7 @@ describe("POST /pets", function () {
             pet: {
                 id: expect.any(Number),
                 name: "newPet",
-                age: 2,
+                age: "2",
                 species: "pet",
                 hunger: 100,
                 userId: testUserIds[1],
@@ -53,7 +53,7 @@ describe("POST /pets", function () {
             .set("authorization", `Bearer ${u1Token}`)
             .send({
                 name: "newPet",
-                age: 2,
+                age: "2",
                 species: "pet",
                 user_id: testUserIds[0],
             });
@@ -61,7 +61,7 @@ describe("POST /pets", function () {
             pet: {
                 id: expect.any(Number),
                 name: "newPet",
-                age: 2,
+                age: "2",
                 species: "pet",
                 hunger: 100,
                 userId: testUserIds[0],
@@ -76,7 +76,7 @@ describe("POST /pets", function () {
             .set("authorization", `Bearer ${u2Token}`)
             .send({
                 name: "newPet",
-                age: 2,
+                age: "2",
                 species: "pet",
                 user_id: testUserIds[0],
             });
@@ -86,7 +86,7 @@ describe("POST /pets", function () {
     test("unauth: non user", async function () {
         const res = await request(app).post(`/users/u1/pets`).send({
             name: "newPet",
-            age: 2,
+            age: "2",
             species: "pet",
             user_id: testUserIds[0],
         });
@@ -110,7 +110,7 @@ describe("POST /pets", function () {
             .send({
                 name: "newPet",
                 species: "pet",
-                age: "not a number",
+                age: 23,
                 user_id: testUserIds[0],
             });
         expect(res.statusCode).toEqual(400);
@@ -127,7 +127,7 @@ describe("GET /pets", function () {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual({
-            pets: [{ name: "p1", age: 1, species: "cat", hunger: 100 }],
+            pets: [{pet_id: expect.any(Number), name: "p1", age: "1", species: "cat", hunger: 100, user_id: expect.any(Number) }],
         });
     });
 
@@ -138,7 +138,7 @@ describe("GET /pets", function () {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual({
-            pets: [{ name: "p1", age: 1, species: "cat", hunger: 100 }],
+            pets: [{ pet_id: expect.any(Number), name: "p1", age: '1', species: "cat", hunger: 100, user_id: expect.any(Number) }],
         });
     });
 
@@ -167,7 +167,7 @@ describe("GET /pets/:id", function () {
             pet: {
                 id: testPetIds[0],
                 name: "p1",
-                age: 1,
+                age: "1",
                 species: "cat",
                 hunger: 100,
                 userId: testUserIds[0],
@@ -184,7 +184,7 @@ describe("GET /pets/:id", function () {
             pet: {
                 id: testPetIds[0],
                 name: "p1",
-                age: 1,
+                age: "1",
                 species: "cat",
                 hunger: 100,
                 userId: testUserIds[0],
@@ -226,7 +226,7 @@ describe("PATCH /pets/:id", function () {
             pet: {
                 id: testPetIds[0],
                 name: "newName",
-                age: 1,
+                age: "1",
                 species: "cat",
                 hunger: 100,
                 userId: testUserIds[0],
@@ -246,7 +246,7 @@ describe("PATCH /pets/:id", function () {
             pet: {
                 id: testPetIds[0],
                 name: "newName",
-                age: 1,
+                age: "1",
                 species: "cat",
                 hunger: 100,
                 userId: testUserIds[0],
@@ -261,14 +261,14 @@ describe("PATCH /pets/:id", function () {
             .send({
                 name: "newName",
                 species: "turtle",
-                age: 45,
+                age: "45",
             });
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual({
             pet: {
                 id: testPetIds[0],
                 name: "newName",
-                age: 45,
+                age: "45",
                 species: "turtle",
                 hunger: 100,
                 userId: testUserIds[0],
