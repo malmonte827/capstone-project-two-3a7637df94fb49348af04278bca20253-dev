@@ -5,7 +5,7 @@ import SignupForm from "../auth/SignupForm"
 import Homepage from "../homepage/Homepage"
 import PetsList from "../pets/PetsList"
 import PetForm from "../pets/PetForm"
-import ProfileForm from "../profile/profileForm"
+import ProfileForm from "../profile/ProfileForm"
 
 /** RoutesList Component
  *

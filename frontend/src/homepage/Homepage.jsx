@@ -20,7 +20,7 @@ function Homepage() {
             <div className="container text-center">
                 <h1 className="mb-4 fw-bold">Capstone</h1>
                 <p className="lead">
-                    Th1s is my Capstone project hope you like it!
+                    This is my Capstone project hope you like it!
                 </p>
                 {currentUser ? (
                     <h2>

@@ -65,7 +65,7 @@ function PetList() {
     
             )}
         <div>
-            <button><Link to="/pets/add">Click to add pet</Link></button>
+            <Link className="btn btn-primary" to="/pets/add">Click to add pet</Link>
             
         </div>
         </div>
