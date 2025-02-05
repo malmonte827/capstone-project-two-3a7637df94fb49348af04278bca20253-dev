@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Base URL for the backend, if enviorment not set use localhost
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3001";
+const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001";
 
 /**  API class to interact with the backend
  *
