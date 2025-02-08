@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 // Base URL for the backend, if enviorment not set use localhost
 const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001";
 
