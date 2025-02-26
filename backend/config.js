@@ -7,7 +7,7 @@ require("colors");
 
 const SECRET_KEY = process.env.SECRET_KEY || "secet-dev"
 
-const PORT = +process.env.PORT || 3001
+const PORT = +process.env.PORT || 10000
 
 /** Use dev, testing, or production database */
 function getDatabaseUri(){
