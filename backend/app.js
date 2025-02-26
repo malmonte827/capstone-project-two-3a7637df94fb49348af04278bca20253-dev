@@ -14,11 +14,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(authenticateJWT)
 
 app.use("/auth", authRoutes)
 app.use("/users", usersRoutes)
 app.use("/users/:username/pets", petsRoutes)
+app.use(authenticateJWT)
 
 
 /** Handle 404 errors -- mathces everything */
