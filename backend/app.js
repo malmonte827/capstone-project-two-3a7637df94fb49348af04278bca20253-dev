@@ -16,8 +16,8 @@ const corsOptions = {
     methods: "GET,POST,PATCH,DELETE",
     allowedHeaders: "Content-Type,Authorization",
 };
+app.options("*", cors(corsOptions)); // Allow preflight requests globally
 
-app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/auth", authRoutes)
