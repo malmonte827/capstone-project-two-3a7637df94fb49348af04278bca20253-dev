@@ -37,17 +37,4 @@ app.use(function (err, req, res, next) {
     });
 });
 
-console.log("Registered Routes:");
-app._router.stack.forEach((middleware) => {
-    if (middleware.route) { // Routes registered directly
-        console.log(middleware.route.path);
-    } else if (middleware.name === 'router') { // Routes in other files
-        middleware.handle.stack.forEach((route) => {
-            if (route.route) {
-                console.log(route.route.path);
-            }
-        });
-    }
-});
-
 module.exports = app;
