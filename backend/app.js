@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use("/auth", authRoutes)
 app.use("/users", usersRoutes)
-app.use("/users", petsRoutes)
+app.use("/users/:username/pets", petsRoutes)
 app.use(authenticateJWT)
 
 
