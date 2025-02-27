@@ -11,8 +11,13 @@ const usersRoutes = require("./routes/users")
 const petsRoutes = require("./routes/pets")
 const authRoutes = require("./routes/auth")
 const app = express();
+const corsOptions = {
+    origin: "*", // Allow all domains (adjust as needed for security)
+    methods: "GET,POST,PATCH,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/auth", authRoutes)
