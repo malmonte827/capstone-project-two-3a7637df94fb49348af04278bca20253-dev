@@ -23,6 +23,11 @@ app.options("*", cors(corsOptions)); // Handle preflight requests
 
 
 app.use(express.json());
+app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.path}`);
+    next();
+});
+
 
 app.use("/auth", authRoutes)
 app.use("/users", usersRoutes)
