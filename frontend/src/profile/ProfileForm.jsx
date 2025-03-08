@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import Alert from "../common/Alert";
 import CapstoneApi from "../api/CapstoneApi";
 import UserContext from "../auth/UserContext"
+import { useNavigate } from "react-router-dom";
 
 /**
  * ProfileForm Component
@@ -23,8 +24,10 @@ function ProfileForm() {
     email: currentUser.email,
     username: currentUser.username,
     phoneNumber: currentUser.phoneNumber,
-    password: ""
   });
+
+  const navigate = useNavigate()
+  
   const [formErrors, setFormErrors] = useState([]);
 
   const [saveConfirmed, setSaveConfirmed] = useState(false);
@@ -54,6 +57,7 @@ function ProfileForm() {
     try {
       updatedUser = await CapstoneApi.saveProfile(username, profileData);
       console.log(updatedUser)
+      navigate("/", { state: { message: "Updated successfully." } });
     } catch (errors) {
       setFormErrors(errors);
       return;
@@ -139,11 +143,6 @@ function ProfileForm() {
 
             {formErrors.length
               ? <Alert type="danger" messages={formErrors} />
-              : null}
-
-            {saveConfirmed
-              ?
-              <Alert type="success" messages={["Updated successfully."]} />
               : null}
 
             <div className="d-grid">

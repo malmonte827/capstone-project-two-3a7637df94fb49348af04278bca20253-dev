@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import UserContext from "../auth/UserContext";
+import Alert from "../common/Alert"
 import "./Homepage.css"
 
 /** Homepage
@@ -14,6 +15,9 @@ import "./Homepage.css"
  */
 function Homepage() {
     const { currentUser } = useContext(UserContext);
+
+    const location = useLocation();
+    const successMessage = location.state?.message || null;
 
     return (
         <div className="Homepage">
@@ -43,6 +47,13 @@ function Homepage() {
                         </Link>
                     </p>
                 )}
+
+            <div className="col-lg-4 offset-lg-4">
+            {successMessage
+              ?
+              <Alert type="success" messages={[successMessage]} />
+              : null}
+            </div>
             </div>
         </div>
     );
