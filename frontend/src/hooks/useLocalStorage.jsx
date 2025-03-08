@@ -15,7 +15,15 @@ import {useEffect, useState} from 'react'
  */
 
 function useLocalStorage(key, firstValue = null){
-const initialValue = localStorage.getItem(key) || firstValue
+    const storedValue = localStorage.getItem(key)
+    let initialValue;
+
+    try{
+        initialValue = storedValue ? JSON.parse(storedValue) : firstValue
+    }catch(err){
+        console.error("Error parsing localStorage value", err)
+        initialValue = firstValue
+    }
 
     const [item, setItem] = useState(initialValue)
 
@@ -24,7 +32,7 @@ const initialValue = localStorage.getItem(key) || firstValue
             if(item === null){
                 localStorage.removeItem(key)
             } else{
-                localStorage.setItem(key, item)
+                localStorage.setItem(key, JSON.stringify(item))
             }
         }, [key, item]
     )
