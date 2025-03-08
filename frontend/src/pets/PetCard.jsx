@@ -51,7 +51,7 @@ return(
       </div>
       <div className="card-body">
         <div className="animal-title">
-          <h1>{name} <span className="badge"> DOG </span></h1>
+          <h1>{name} <span className="badge"> {species} </span></h1>
         </div>
         <div className="animal-info">
           <h4>Info</h4>
