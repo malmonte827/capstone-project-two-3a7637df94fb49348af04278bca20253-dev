@@ -15,10 +15,10 @@ class Pet {
 
     static async create(data){
         const result = await db.query(
-            `INSERT INTO pets (name, age, species, user_id)
-            VALUES ($1, $2, $3, $4)
+            `INSERT INTO pets (name, age, species, hunger, user_id)
+            VALUES ($1, $2, $3, $4, $5)
             RETURNING id, name, age, species, hunger, user_id AS "userId"`,
-            [data.name, data.age, data.species, data.user_id]
+            [data.name, data.age, data.species, data.hunger, data.user_id]
         )
         const pet = result.rows[0]
 
