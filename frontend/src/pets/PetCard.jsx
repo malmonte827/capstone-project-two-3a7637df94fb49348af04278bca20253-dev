@@ -21,7 +21,7 @@ import UserContext from "../auth/UserContext"
 function PetCard({ pet, onDelete}){
 
   const {currentUser} = useContext(UserContext)
-  const {pet_id, name, age, species, hunger} = pet
+  const {pet_id, name, age, species, description, hunger} = pet
 
   /**
      * Handles the deletion of a pet.
@@ -59,6 +59,10 @@ return(
             <li><span className="labels">Hunger Level:</span> {hunger}</li>
             <li><span className="labels">Age:</span> {age} years.</li>
           </ul>
+        </div>
+        <div className="animal-description">
+          <h4>Description</h4>
+          <p>{description}</p>   
         </div>
 
         <div className="mt-4">
