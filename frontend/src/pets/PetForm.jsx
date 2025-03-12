@@ -20,7 +20,8 @@ function PetForm() {
         name: pet ? pet.name :  "",
         age: pet ? pet.age :  "",
         species: pet ? pet.species :  "",
-        hunger: pet ? pet.hunger :  ""
+        hunger: pet ? pet.hunger :  "",
+        description: pet ? pet.description : ""
     });
 
     const [formErrors, setFormErrors] = useState([]);
@@ -143,6 +144,22 @@ function PetForm() {
                                     id="hunger"
                                     name="hunger"
                                     value={formData.hunger}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label
+                                    className="form-label"
+                                    htmlFor="description"
+                                >
+                                    Description
+                                </label>
+                                <textarea
+                                    className="form-control"
+                                    id="description"
+                                    name="description"
+                                    maxLength="250"
+                                    value={formData.description}
                                     onChange={handleChange}
                                 />
                             </div>
