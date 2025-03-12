@@ -30,13 +30,17 @@ function PetForm() {
     /** 
      * Handles form input changes.
      * Updates the corresponding form field in state.
-     *
+     * Converts hunger input to an integer
+     * 
      * @param {Object} evt - Event object from input field change.
      */
-    function handleChange(evt) {
-        const { name, value } = evt.target;
-        setFormData((data) => ({ ...data, [name]: value }));
-    }
+ function handleChange(evt) {
+    const { name, value } = evt.target;
+    setFormData((data) => ({
+        ...data,
+        [name]: name === "hunger" ? parseInt(value) : value
+    }));
+}
 
     /**
      * Handles form submission.
@@ -49,10 +53,14 @@ function PetForm() {
      */
     async function handleSubmit(evt) {
         evt.preventDefault();
+        const updateFormDataHunger = {
+            ...formData,
+            hunger: parseInt(formData.hunger) 
+        };
         try {
             if(pet){
                 console.log("in update")
-                await CapstoneApi.updatePet(currentUser.username, pet.pet_id, formData)
+                await CapstoneApi.updatePet(currentUser.username, pet.pet_id, updateFormDataHunger)
                 navigate("/pets")
             }else{
                 
@@ -131,7 +139,7 @@ function PetForm() {
                                 </label>
                                 <input
                                     className="form-control"
-                                    type="int"
+                                    type="number"
                                     id="hunger"
                                     name="hunger"
                                     value={formData.hunger}
