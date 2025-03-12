@@ -14,7 +14,7 @@ CREATE TABLE pets (
     name TEXT NOT NULL,
     age TEXT,
     species TEXT NOT NULL,
-    hunger INTEGER NOT NULL DEFAULT 100,
+    hunger INTEGER NOT NULL,
     user_id INTEGER NOT NULL 
     REFERENCES users ON DELETE CASCADE    
 );
