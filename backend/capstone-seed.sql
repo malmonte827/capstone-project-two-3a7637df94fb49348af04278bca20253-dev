@@ -20,12 +20,13 @@ VALUES(
 );
 
 
-INSERT INTO pets(name, age, species, hunger, user_id)
+INSERT INTO pets(name, age, species, hunger, description, user_id)
 VALUES (
     'max',
     '4',
     'dog',
     '50',
+    'he is a dog',
     1
 ),
 (
@@ -33,5 +34,7 @@ VALUES (
     '3',
     'dog',
     '75',
+    'he is a dog',
+
     1
 );
