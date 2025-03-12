@@ -15,10 +15,10 @@ class Pet {
 
     static async create(data){
         const result = await db.query(
-            `INSERT INTO pets (name, age, species, hunger, user_id)
-            VALUES ($1, $2, $3, $4, $5)
-            RETURNING id, name, age, species, hunger, user_id AS "userId"`,
-            [data.name, data.age, data.species, data.hunger, data.user_id]
+            `INSERT INTO pets (name, age, species, hunger, description, user_id)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING id, name, age, species, hunger, description, user_id AS "userId"`,
+            [data.name, data.age, data.species, data.hunger, data.description, data.user_id]
         )
         const pet = result.rows[0]
 
@@ -40,7 +40,7 @@ class Pet {
         const updateQuery = `UPDATE pets
                             SET ${setCols}
                             WHERE id = ${idIdx}
-                            RETURNING id, name, age, species, hunger, user_id AS "userId"`
+                            RETURNING id, name, age, species, hunger, description, user_id AS "userId"`
         
         const result = await db.query(updateQuery, [...values, id])
 
@@ -60,7 +60,7 @@ class Pet {
      */
     static async getAll(username){
         const result = await db.query(
-            `SELECT  pets.id AS pet_id, name, age, species, hunger, user_id
+            `SELECT  pets.id AS pet_id, name, age, species, hunger, description, user_id
             FROM pets 
             JOIN users ON pets.user_id = users.id 
             WHERE users.username = $1`,
@@ -79,7 +79,7 @@ class Pet {
      */
     static async get(id){
         const result = await db.query(
-            `SELECT id, name, age, species, hunger, user_id AS "userId"
+            `SELECT id, name, age, species, hunger, description, user_id AS "userId"
             FROM pets
             WHERE id = $1`,
             [id]
