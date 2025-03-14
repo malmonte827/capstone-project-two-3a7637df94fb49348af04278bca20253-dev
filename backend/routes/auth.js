@@ -22,7 +22,15 @@ router.post("/register", async function (req, res, next) {
     try {
         const validator = jsonschema.validate(req.body, userRegisterSchema);
         if (!validator.valid) {
-            const errs = validator.errors.map((e) => e.stack);
+            console.log(validator.errors);
+            const errs = validator.errors.map((e) => {
+                // Format Error Message
+                let errMsg = e.stack.replace("instance.", "");
+                errMsg = errMsg.replace(/([a-z])([A-Z])/g, "$1 $2");
+                errMsg = `${errMsg.charAt(0).toUpperCase()}${errMsg.slice(1)}`;
+                return `${errMsg}`;
+            });
+
             throw new BadRequestError(errs);
         }
 
