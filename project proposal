@@ -1,18 +1,36 @@
 Project Proposal:
 
-Stack:
-I'll be using React for the front-end and Node.js for the back-end. I'll also be using PostgreSQL for my database.
+Stack
+I will be using:
 
-Focus:
-The focus of this application will be evenly spread between front and back end development.
+Front-end: React with React Router for navigation and Tailwind CSS for styling.
+Back-end: Node.js with Express for API development.
+Database: PostgreSQL
+Authentication: JWT-based authentication for user security.
+Focus
+The application will balance front-end and back-end development.
 
-Type:
-The app will be a website
+Type
+A responsive web application.
 
-Goal:
-The goal is to help pet owners track the health of their pets. And have a centralized place to do it all.
+Goal
+The goal of this app is to provide pet owners with a centralized platform to track and manage their pet’s health records. Users will be able to log their pet’s medical history, upcoming appointments, vaccinations, dietary preferences, and other important details.
 
-Data:
-The app will use a custom-build api with data such as:
+Features
+User Profiles: Users can register, log in, and manage their personal information.
+Pet Profiles: Owners can create profiles for each pet, storing details such as:
+Name
+Age
+Species
+Breed
+Vaccination history
+Medical records
+Upcoming vet appointments
+Reminders & Notifications: Users can receive reminders for vaccinations and vet visits.
+Multi-Pet Support: Users can manage multiple pets under one account.
+File Uploads: Upload vet documents or prescription records for easy access.
 
-user profiles consiting of names, emails, phone numbers and pet profiles consisting of age species name.
+Data Structure
+The application will store the following structured data:
+
+![alt text](dbDiagram.png)
