@@ -46,7 +46,7 @@ return(
       <div className="card-head">
         <div className="animal-detail">
           <h2>{name}</h2>
-          <img src="../image/download.jpg" alt="Pet Image" class="animal-img"/>
+          <img src="../image/download.jpg" alt="Pet Image" className="animal-img"/>
         </div>
       </div>
       <div className="card-body">
