@@ -31,6 +31,8 @@ describe("POST /pets", function () {
             .send({
                 name: "newPet",
                 age: "2",
+                hunger: 10,
+                description: "my new pet",
                 species: "pet",
                 user_id: testUserIds[1],
             });
@@ -40,7 +42,8 @@ describe("POST /pets", function () {
                 name: "newPet",
                 age: "2",
                 species: "pet",
-                hunger: 100,
+                hunger: 10,
+                description: "my new pet",
                 userId: testUserIds[1],
             },
         });
@@ -55,6 +58,8 @@ describe("POST /pets", function () {
                 name: "newPet",
                 age: "2",
                 species: "pet",
+                hunger: 10,
+                description: "my new pet",
                 user_id: testUserIds[0],
             });
         expect(res.body).toEqual({
@@ -63,7 +68,8 @@ describe("POST /pets", function () {
                 name: "newPet",
                 age: "2",
                 species: "pet",
-                hunger: 100,
+                hunger: 10,
+                description: "my new pet",
                 userId: testUserIds[0],
             },
         });
@@ -127,7 +133,7 @@ describe("GET /pets", function () {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual({
-            pets: [{pet_id: expect.any(Number), name: "p1", age: "1", species: "cat", hunger: 100, user_id: expect.any(Number) }],
+            pets: [{pet_id: expect.any(Number), name: "p1", age: "1", species: "cat", hunger: 1,description: "pet 1", user_id: expect.any(Number) }],
         });
     });
 
@@ -138,7 +144,7 @@ describe("GET /pets", function () {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual({
-            pets: [{ pet_id: expect.any(Number), name: "p1", age: '1', species: "cat", hunger: 100, user_id: expect.any(Number) }],
+            pets: [{ pet_id: expect.any(Number), name: "p1", age: '1', species: "cat", hunger: 1, description: "pet 1", user_id: expect.any(Number) }],
         });
     });
 
@@ -169,7 +175,8 @@ describe("GET /pets/:id", function () {
                 name: "p1",
                 age: "1",
                 species: "cat",
-                hunger: 100,
+                hunger: 1,
+                description: "pet 1",
                 userId: testUserIds[0],
             },
         });
@@ -186,7 +193,8 @@ describe("GET /pets/:id", function () {
                 name: "p1",
                 age: "1",
                 species: "cat",
-                hunger: 100,
+                hunger: 1,
+                description: "pet 1",
                 userId: testUserIds[0],
             },
         });
@@ -228,7 +236,8 @@ describe("PATCH /pets/:id", function () {
                 name: "newName",
                 age: "1",
                 species: "cat",
-                hunger: 100,
+                hunger: 1,
+                description: "pet 1",
                 userId: testUserIds[0],
             },
         });
@@ -248,7 +257,8 @@ describe("PATCH /pets/:id", function () {
                 name: "newName",
                 age: "1",
                 species: "cat",
-                hunger: 100,
+                hunger: 1,
+                description: "pet 1",
                 userId: testUserIds[0],
             },
         });
@@ -270,7 +280,8 @@ describe("PATCH /pets/:id", function () {
                 name: "newName",
                 age: "45",
                 species: "turtle",
-                hunger: 100,
+                hunger: 1,
+                description: "pet 1",
                 userId: testUserIds[0],
             },
         });
