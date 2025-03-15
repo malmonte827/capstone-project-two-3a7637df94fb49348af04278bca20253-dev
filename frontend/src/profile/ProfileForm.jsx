@@ -96,16 +96,18 @@ function ProfileForm() {
         <div className="card-body">
           <form>
             <div className="mb-3">
-              <label className="form-label">Username</label>
+              <label className="form-label" htmlFor="username">Username</label>
               <input
+                id="username"
                 disabled
                 className="form-control"
                 placeholder={formData.username}
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Password</label>
+              <label className="form-label" htmlFor="password">Password</label>
               <input
+                id="password"
                 name="password"
                 type="password"
                 className="form-control"
@@ -114,8 +116,9 @@ function ProfileForm() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">First Name</label>
+              <label className="form-label" htmlFor="firstName">First Name</label>
               <input
+              id="firstName"
                 name="firstName"
                 className="form-control"
                 value={formData.firstName}
@@ -123,8 +126,9 @@ function ProfileForm() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Last Name</label>
+              <label className="form-label" htmlFor="lastName">Last Name</label>
               <input
+                id="lastName"
                 name="lastName"
                 className="form-control"
                 value={formData.lastName}
@@ -132,8 +136,9 @@ function ProfileForm() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Email</label>
+              <label className="form-label" htmlFor="email">Email</label>
               <input
+                id="email"
                 name="email"
                 className="form-control"
                 value={formData.email}
