@@ -23,6 +23,8 @@ describe("create", function () {
     const newPet = {
         name: "new",
         age: "1",
+        description: "test",
+        hunger: 5,
         species: "newSpecies",
     };
     it("works", async function () {
@@ -30,7 +32,7 @@ describe("create", function () {
         expect(pet).toEqual({
             ...newPet,
             userId: testUserIds[0],
-            hunger: 100,
+            hunger: 5,
             id: expect.any(Number),
         });
     });
@@ -42,6 +44,7 @@ describe("update", function () {
     const updateData = {
         name: "new",
         age: "999",
+        description: "test",
         hunger: 55,
         species: "newSpecies",
     };
@@ -83,6 +86,7 @@ describe("get", function () {
             name: "p1",
             age: "1",
             species: "cat",
+            description: "its a cat",
             hunger: 1,
             userId: testUserIds[0],
         });
