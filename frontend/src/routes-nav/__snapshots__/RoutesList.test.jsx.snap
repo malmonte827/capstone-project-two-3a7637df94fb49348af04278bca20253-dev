@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<RoutesList /> > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="pt-5"
+  >
+    <div
+      class="Homepage"
+    >
+      <div
+        class="container text-center"
+      >
+        <h1
+          class="mb-4 fw-bold"
+        >
+          Capstone
+        </h1>
+        <p
+          class="lead"
+        >
+          This is my Capstone project hope you like it!
+        </p>
+        <h2>
+          Welcome Back, John
+        </h2>
+        <div
+          class="col-lg-4 offset-lg-4"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

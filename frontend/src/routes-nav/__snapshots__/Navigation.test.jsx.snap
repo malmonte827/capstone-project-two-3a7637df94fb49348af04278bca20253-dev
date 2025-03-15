@@ -1,0 +1,59 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<Navigation /> > When the user is logged in > matches snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="Navigation navbar navbar-expandd-md"
+  >
+    <div
+      class="container-fluid"
+    >
+      <a
+        class="navbar-brand"
+        data-discover="true"
+        href="/"
+      >
+        Capstone
+      </a>
+      <ul
+        class="navbar-nav ms-auto"
+      >
+        <li
+          class="nav-item me-4"
+        >
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/pets"
+          >
+            Pets
+          </a>
+        </li>
+        <li
+          class="nav-item me-4"
+        >
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/profile"
+          >
+            Profile
+          </a>
+        </li>
+        <li
+          class="nav-item me-4"
+        >
+          <a
+            aria-current="page"
+            class="nav-link active"
+            data-discover="true"
+            href="/"
+          >
+            Logout John
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

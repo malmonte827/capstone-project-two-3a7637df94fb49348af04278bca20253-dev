@@ -1,0 +1,76 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<LoginForm /> > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="LoginForm"
+  >
+    <div
+      class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4"
+    >
+      <h3
+        class="mb-3"
+      >
+        Login
+      </h3>
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <form>
+            <div
+              class="mb-3"
+            >
+              <label
+                class="form-label"
+                for="username"
+              >
+                Username
+              </label>
+              <input
+                autocomplete="username"
+                class="form-control"
+                id="username"
+                name="username"
+                required=""
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="mb-3"
+            >
+              <label
+                class="form-label"
+                for="password"
+              >
+                Password
+              </label>
+              <input
+                autocomplete="current-password"
+                class="form-control"
+                id="password"
+                name="password"
+                required=""
+                type="password"
+                value=""
+              />
+            </div>
+            <div
+              class="d-grid"
+            >
+              <button
+                class="btn btn-primary"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

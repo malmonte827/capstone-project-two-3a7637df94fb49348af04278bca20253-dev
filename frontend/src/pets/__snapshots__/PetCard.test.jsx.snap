@@ -1,0 +1,101 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<PetCard/> > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="PetCard card"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-head"
+        >
+          <div
+            class="animal-detail"
+          >
+            <h2>
+              Buddy
+            </h2>
+            <img
+              alt="Pet Image"
+              class="animal-img"
+              src="../image/download.jpg"
+            />
+          </div>
+        </div>
+        <div
+          class="card-body"
+        >
+          <div
+            class="animal-title"
+          >
+            <h1>
+              Buddy 
+              <span
+                class="badge"
+              >
+                 Dog 
+              </span>
+            </h1>
+          </div>
+          <div
+            class="animal-info"
+          >
+            <h4>
+              Info
+            </h4>
+            <ul>
+              <li>
+                <span
+                  class="labels"
+                >
+                  Hunger Level:
+                </span>
+                 3
+              </li>
+              <li>
+                <span
+                  class="labels"
+                >
+                  Age:
+                </span>
+                 5 years.
+              </li>
+            </ul>
+          </div>
+          <div
+            class="animal-description"
+          >
+            <h4>
+              Description
+            </h4>
+            <p>
+              Friendly golden retriever
+            </p>
+          </div>
+          <div
+            class="mt-4"
+          >
+            <a
+              class="btn btn-primary"
+              data-discover="true"
+              href="/pets/edit"
+            >
+              Edit
+            </a>
+            <button
+              class="btn btn-danger"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
