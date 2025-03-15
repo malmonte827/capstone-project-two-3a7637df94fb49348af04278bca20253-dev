@@ -49,6 +49,7 @@ async function commonBeforeAll() {
         age: 1,
         species: "cat",
         hunger: 1,
+        description: "pet 1",
         user_id: testUserIds[0]
     })
 
@@ -57,6 +58,7 @@ async function commonBeforeAll() {
         age: 2,
         species: "dog",
         hunger: 2,
+        description: "pet 2",
         user_id: testUserIds[1]
     })
     await Pet.create({        
@@ -64,6 +66,7 @@ async function commonBeforeAll() {
         age: 3,
         species: "bird",
         hunger: 3,
+        description: "pet 3",
         user_id: testUserIds[2]
     })
     const petResults = await db.query(`SELECT id FROM pets`)
