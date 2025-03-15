@@ -32,10 +32,10 @@ async function commonBeforeAll() {
 
    const petResults = await db.query(
         `
-        INSERT INTO pets (name, age, species, hunger, user_id)
-        VALUES ('p1', 1, 'cat', 1, $1),
-               ('p2', 2, 'dog', 2, $2),
-               ('p3', 3, 'bird', 3, $3)
+        INSERT INTO pets (name, age, species, hunger, user_id, description)
+        VALUES ('p1', 1, 'cat', 1, $1, 'its a cat'),
+               ('p2', 2, 'dog', 2, $2, 'its a dog'),
+               ('p3', 3, 'bird', 3, $3, 'its a bird')
         RETURNING id`,
         [testUserIds[0], testUserIds[1], testUserIds[2]]
     );
